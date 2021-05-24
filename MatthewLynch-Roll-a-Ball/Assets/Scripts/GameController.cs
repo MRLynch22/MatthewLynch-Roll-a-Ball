@@ -2,17 +2,36 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System;
 
 public class GameController : MonoBehaviour
 {
-    public TMP_Text scoreText, timerText; 
-    private int _score;
+    public TMP_Text scoreText, timerText, endScoreText, endTimerText;
+    public GameObject endLevelScreen;
+    private int _score, _maxScore;
     private float _timer;
 
     private void Start()
     {
-        scoreText.text ="Score:0";
+        ScorePickup[] scorePickups = FindObjectsOfType<ScorePickup>();
+        foreach (ScorePickup item in scorePickups)
+        {
+            _maxScore += item.scoreValue;
+        }
+
+        scoreText.text = "Score:0/" + _maxScore;
     }
+
+    public void EndLevel()
+    {
+        endLevelScreen.SetActive(true);
+        scoreText.gameObject.SetActive(false);
+        timerText.gameObject.SetActive(false);
+        endTimerText.text = "Time Taken: " + _timer.ToString("F2");
+        endScoreText.text = "Score: " + _score + "/" + _maxScore;
+        FindObjectOfType<BallController>().DisabledBallController();
+    }
+
     private void Update()
     {
         _timer += Time.deltaTime;
@@ -34,6 +53,6 @@ public class GameController : MonoBehaviour
 
     private void UpdateScoreText()
     {
-        scoreText.text = "Score: " + _score;
+        scoreText.text = "Score: " + _score + "/" + _maxScore;
     }
 }

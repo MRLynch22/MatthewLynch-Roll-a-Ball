@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class EndZone : MonoBehaviour
 {
-    private SceneLoader _sceneLoader;
+    private GameController _gc;
 
     private void Start()
     {
-        _sceneLoader = FindObjectOfType<SceneLoader>();
+        _gc = FindObjectOfType<GameController>();
     }
 
 
@@ -16,7 +16,7 @@ public class EndZone : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            _sceneLoader.LoadNextScene();
+            _gc.EndLevel();
         }
     }
 }

@@ -29,4 +29,10 @@ public class BallController : MonoBehaviour
 
         _rigidBody.AddForce(new Vector3(moveVector.x, 0, moveVector.y) * speed, ForceMode.Force);
     }
+
+    public void DisabledBallController()
+    {
+        _rigidBody.isKinematic = true;
+        this.enabled = false;
+    }
 }
