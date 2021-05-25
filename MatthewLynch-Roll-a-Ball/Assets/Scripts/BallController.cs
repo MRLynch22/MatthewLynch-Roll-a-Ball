@@ -9,6 +9,7 @@ public class BallController : MonoBehaviour
     public float jumpForce;
     private Rigidbody _rigidBody;
     private bool _isGrounded;
+    public Transform respawnPosition;
 
     // Start is called before the first frame update
     void Start()
@@ -26,7 +27,7 @@ public class BallController : MonoBehaviour
                 _rigidBody.AddForce(new Vector3(0.0f, jumpForce, 0.0f), ForceMode.Impulse);
             }
         }
-            
+
         Vector2 moveVector = Vector2.zero;
         moveVector.x = Input.GetAxis("Horizontal");
         moveVector.y = Input.GetAxis("Vertical");
@@ -48,10 +49,16 @@ public class BallController : MonoBehaviour
         }
     }
 
-
     public void DisabledBallController()
     {
         _rigidBody.isKinematic = true;
         this.enabled = false;
     }
+
+    public void Respawn()
+    {
+        this.gameObject.transform.position = respawnPosition.position;
+        _rigidBody.velocity = Vector3.zero;
+    }
+
 }

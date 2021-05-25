@@ -10,9 +10,12 @@ public class GameController : MonoBehaviour
     public GameObject endLevelScreen;
     private int _score, _maxScore;
     private float _timer;
+    private SceneLoader _sceneLoader;
+    public bool isCountingUp;
 
     private void Start()
     {
+        _sceneLoader = GetComponent<SceneLoader>();
         ScorePickup[] scorePickups = FindObjectsOfType<ScorePickup>();
         foreach (ScorePickup item in scorePickups)
         {
@@ -33,6 +36,7 @@ public class GameController : MonoBehaviour
     }
 
     private void Update()
+
     {
         _timer += Time.deltaTime;
         timerText.text = "Time Taken: " + _timer.ToString("F2");

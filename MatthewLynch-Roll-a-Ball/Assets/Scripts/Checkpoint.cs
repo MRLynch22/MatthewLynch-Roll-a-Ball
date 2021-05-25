@@ -4,19 +4,24 @@ using UnityEngine;
 
 public class Checkpoint : MonoBehaviour
 {
-    private static Checkpoint instance;
-    public Vector2 lastCheckPointPos;
+    public Transform checkpointPosition;
 
-    void Awake()
+
+    private void OnTriggerEnter(Collider other)
     {
-        if(instance == null)
+        
+        if(other.gameObject.tag == "Player")
         {
-            instance = this;
-            DontDestroyOnLoad(instance);
-        }
-        else
-        {
-            Destroy(gameObject);
+            other.gameObject.GetComponent<BallController>().respawnPosition = checkpointPosition;
         }
     }
+
+
+
+
+
+
 }
+
+
+

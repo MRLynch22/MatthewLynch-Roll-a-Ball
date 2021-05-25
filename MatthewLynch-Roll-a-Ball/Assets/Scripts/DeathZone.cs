@@ -16,7 +16,7 @@ public class DeathZone : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            _sceneLoader.RestartScene();
+            other.gameObject.GetComponent<BallController>().Respawn();
         }
     }
 }
