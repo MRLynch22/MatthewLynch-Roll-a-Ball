@@ -15,12 +15,6 @@ public class Checkpoint : MonoBehaviour
             other.gameObject.GetComponent<BallController>().respawnPosition = checkpointPosition;
         }
     }
-
-
-
-
-
-
 }
 
 

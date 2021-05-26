@@ -10,6 +10,7 @@ public class BallController : MonoBehaviour
     private Rigidbody _rigidBody;
     private bool _isGrounded;
     public Transform respawnPosition;
+    private Vector2 _moveVector;
 
     // Start is called before the first frame update
     void Start()
@@ -24,7 +25,7 @@ public class BallController : MonoBehaviour
         {
             if (_isGrounded == true)
             {
-                _rigidBody.AddForce(new Vector3(0.0f, jumpForce, 0.0f), ForceMode.Impulse);
+                _rigidBody.AddForce(new Vector3.up * jumpForce, ForceMode.Impulse);
             }
         }
 
@@ -32,7 +33,10 @@ public class BallController : MonoBehaviour
         moveVector.x = Input.GetAxis("Horizontal");
         moveVector.y = Input.GetAxis("Vertical");
 
-        _rigidBody.AddForce(new Vector3(moveVector.x, 0, moveVector.y) * speed, ForceMode.Force);
+    }
+    private void FixedUpdate()
+    {
+        _rigidBody.AddForce(new Vector3(_moveVector.x, 0, _moveVector.y) * speed, ForceMode.Force);
     }
     private void OnCollisionStay(Collision collision)
     {
